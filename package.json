@@ -1,0 +1,26 @@
+{
+  "name": "restartify",
+  "version": "1.0.0",
+  "description": "A command-line tool to restart the Spotify app when it misbehaves.",
+  "main": "src/index.js",
+  "bin": {
+    "restartify": "src/index.js"
+  },
+  "scripts": {
+    "start": "tsc ./src ./dist && node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HappiiDreamer/restartify.git"
+  },
+  "author": "HappiiDreamer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HappiiDreamer/restartify/issues"
+  },
+  "homepage": "https://github.com/HappiiDreamer/restartify#readme",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "commander": "^10.0.1"
+  }
+}
