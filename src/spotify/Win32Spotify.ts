@@ -1,5 +1,5 @@
 import path from "path";
-import { ChildProcessWithoutNullStreams, exec, spawn } from "child_process";
+import { ChildProcess, exec, spawn } from "child_process";
 import { ISpotify } from "./ISpotify.js";
 
 class Win32Spotify implements ISpotify {
@@ -12,13 +12,18 @@ class Win32Spotify implements ISpotify {
   }
 
   async start(): Promise<number | undefined> {
-    const process: ChildProcessWithoutNullStreams = spawn(this.filename);
+    const process: ChildProcess = spawn(this.filename, {
+      detached: true,
+      stdio: 'ignore'
+    });
+    process.unref();
+
     return process.pid;
   }
   async kill(): Promise<void> {
     await this.killProcesses(...await this.getSpotifyProcesses());
   }
-  
+
   private async getSpotifyProcesses(): Promise<number[]> {
     return new Promise<number[]>((resolve, reject) => {
       const command = `tasklist /FI "IMAGENAME eq ${this.processName}" /NH /FO CSV`;
